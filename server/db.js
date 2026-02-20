@@ -1,0 +1,19 @@
+const mysql = require('mysql2');
+
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'root@1234567890',   // put your mysql password if you set one
+  database: 'prodigy_auth',
+  port: 3308      // ← THIS IS IMPORTANT
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error("Database connection failed:", err);
+  } else {
+    console.log("MySQL Connected");
+  }
+});
+
+module.exports = db;

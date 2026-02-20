@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-body">
+
+<div class="login-container">
+  <h2>Create Account</h2>
+  <p class="subtitle">Register to access employee management</p>
+
+  <div class="input-group">
+    <input type="text" id="name" required>
+    <label>Name</label>
+  </div>
+
+  <div class="input-group">
+    <input type="email" id="email" required>
+    <label>Email</label>
+  </div>
+
+  <div class="input-group">
+    <input type="password" id="password" required>
+    <label>Password</label>
+  </div>
+
+  <button class="login-btn" onclick="register()">Register</button>
+
+  <p class="register-link">
+    Already have an account? <a href="login.html">Login</a>
+  </p>
+</div>
+
+<script>
+async function register() {
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  const res = await fetch("http://localhost:5000/api/auth/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name, email, password })
+  });
+
+  const data = await res.json();
+
+  if (res.status === 201) {
+    alert("Registration successful!");
+    window.location.href = "login.html";
+  } else {
+    alert(data.message);
+  }
+}
+</script>
+
+</body>
+</html>
